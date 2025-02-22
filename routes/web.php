@@ -12,3 +12,5 @@ Route::get('/admin/dashboard', function () {
 });
 
 Route::get('admin/categories', [\App\Http\Controllers\admin\CategoriesController::class, 'index']);
+Route::get('admin/categories/create', [\App\Http\Controllers\admin\CategoriesController::class, 'create']);
+Route::post('admin/categories', [\App\Http\Controllers\admin\CategoriesController::class, 'store']);
