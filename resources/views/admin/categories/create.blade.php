@@ -6,7 +6,7 @@
         <h1 class="card-header bg-white">
             Create new category
         </h1>
-        <form action="/admin/categories" method="POST">
+        <form action="{{ route('admin.categories.store')}}" method="POST">
             @csrf
             <div class="form-group p-3">
                 <label for="name">Enter Category</label>

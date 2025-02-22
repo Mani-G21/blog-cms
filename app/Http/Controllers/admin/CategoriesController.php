@@ -25,6 +25,6 @@ class CategoriesController extends Controller
             'name' => 'required|unique:categories|min:3|max:255'
         ]);
         Category::create($validated);
-        return redirect('admin/categories');
+        return redirect()->route('admin.categories.index')->with('success', 'Category created successfully!');
     }
 }
