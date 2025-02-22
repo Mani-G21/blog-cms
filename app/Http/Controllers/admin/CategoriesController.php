@@ -41,4 +41,13 @@ class CategoriesController extends Controller
         $category->update($validated);
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');
     }
+
+    public function destroy(Category $category) {
+        $category->delete();
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category Deleted Successfully!');
+    }
+
+
+
 }
