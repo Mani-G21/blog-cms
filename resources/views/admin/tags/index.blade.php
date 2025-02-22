@@ -1,11 +1,11 @@
 @extends('admin.layouts.app')
-@section('title', 'Pen It - Categories')
+@section('title', 'Pen It - Tags')
 @section('main-content')
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Categories</h1>
-        <a href="/admin/categories/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-cog fa-sm text-white-50"></i> Create Category</a>
+        <h1 class="h3 mb-0 text-gray-800">Tags</h1>
+        <a href="/admin/tags/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-cog fa-sm text-white-50"></i> Create Tag</a>
     </div>
     @include('admin.layouts._alerts')
     <div class="card">
@@ -19,17 +19,17 @@
                             <th>Actions</th>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($tags as $tag)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $tag->id }}</td>
+                                    <td>{{ $tag->name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                        <a href="{{ route('admin.tags.edit', $tag->id) }}"
                                             class="btn btn-outline-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button class="btn btn-outline-danger delete-category" data-toggle="modal"
-                                            data-target="#deleteModal" data-category-id="{{ $category->id }}">
+                                        <button class="btn btn-outline-danger delete-tag" data-toggle="modal"
+                                            data-target="#deleteModal" data-tag-id="{{ $tag->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
 
@@ -44,7 +44,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-md-12">
-                    {{ $categories->links('vendor.pagination.bootstrap-5') }}
+                    {{ $tags->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
         </div>
@@ -55,13 +55,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Category ?</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Tag ?</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you wanna delete this category?</p>
+                    <p>Are you sure you wanna delete this tag?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -79,20 +79,20 @@
 
 @section('page-level-scripts')
     <script>
-        const deleteCategoryButtons = document.querySelectorAll('.delete-category');
+        const deleteTagsButtons = document.querySelectorAll('.delete-tag');
         const deleteForm = document.querySelector("#deleteForm");
         function loadDeleteModal(evt) {
-            let categoryId = null;
-            if(evt.target.classList.contains('delete-category')) {
-                categoryId = evt.target.dataset.categoryId;
-            } else if(evt.target.parentElement.classList.contains('delete-category')) {
-                categoryId = evt.target.parentElement.dataset.categoryId;
+            let tagId = null;
+            if(evt.target.classList.contains('delete-tag')) {
+                tagId = evt.target.dataset.tagId;
+            } else if(evt.target.parentElement.classList.contains('delete-tag')) {
+                tagId = evt.target.parentElement.dataset.tagId;
             }
-            deleteForm.setAttribute('action', `/admin/categories/${categoryId}`);
+            deleteForm.setAttribute('action', `/admin/tags/${tagId}`);
         }
 
-        deleteCategoryButtons.forEach(function(deleteCategoryButton) {
-            deleteCategoryButton.addEventListener('click', loadDeleteModal);
+        deleteTagsButtons.forEach(function(deleteTagButton) {
+            deleteTagButton.addEventListener('click', loadDeleteModal);
         });
     </script>
 @endsection

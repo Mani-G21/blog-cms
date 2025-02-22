@@ -6,6 +6,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::resource('tags', \App\Http\Controllers\admin\TagsController::class)->except(['show']);
+});
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
