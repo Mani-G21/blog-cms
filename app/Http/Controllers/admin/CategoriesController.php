@@ -27,4 +27,18 @@ class CategoriesController extends Controller
         Category::create($validated);
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully!');
     }
+
+    public function edit(Request $request, Category $category){
+        return view('admin.categories.edit', compact([
+            'category'
+        ]));
+    }
+
+    public function update(Request $request, Category $category){
+        $validated = $request->validate([
+            'name' => 'required|min:3|max:255|unique:categories,name,'.$category->id
+        ]);
+        $category->update($validated);
+        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');
+    }
 }
