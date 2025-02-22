@@ -10,3 +10,5 @@ Route::get('/', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
+
+Route::get('admin/categories', [\App\Http\Controllers\admin\CategoriesController::class, 'index']);
