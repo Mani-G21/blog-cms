@@ -8,11 +8,14 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::resource('tags', \App\Http\Controllers\admin\TagsController::class)->except(['show']);
+    Route::resource('posts', \App\Http\Controllers\admin\PostsController::class);
 });
 
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
+
+
 
 Route::get('admin/categories', [\App\Http\Controllers\admin\CategoriesController::class, 'index'])->name('admin.categories.index');
 Route::get('admin/categories/create', [\App\Http\Controllers\admin\CategoriesController::class, 'create'])->name('admin.categories.create');
