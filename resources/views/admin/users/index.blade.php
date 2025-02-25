@@ -9,7 +9,7 @@
     @include('admin.layouts._alerts')
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-responsive">
@@ -17,6 +17,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Actions</th>
                         </thead>
 
                         <tbody>
