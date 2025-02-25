@@ -18,8 +18,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence,
-            'excerpt' => fake()->paragraph,
+            'title' => fake()->words(4, true),
+            'excerpt' => fake()->sentence,
             'body' => fake()->paragraphs(random_int(5, 8), true),
             'category_id' => Category::all('id')->random()->id,
             'thumbnail' => 'thumbnails/' . random_int(1, 10) . ".jpeg"
