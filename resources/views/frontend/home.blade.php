@@ -1,10 +1,9 @@
 @extends('frontend.layouts.app')
-
 @section('main-content')
     <div class="row">
         @foreach ($posts as $post)
             <div class="col-md-4 col-sm-6 col-xs-12 mb50">
-                <h4 class="blog-title"><a href="#">{{ $post->title }}</a></h4>
+                <h4 class="blog-title"><a href={{route('frontend.singleBlog', $post)}} >{{ $post->title }}</a></h4>
                 <div class="blog-three-attrib">
                     <span class="icon-calendar"></span>Dec 15 2019 |
                     <span class=" icon-pencil"></span><a href="#">John Doe</a>
@@ -13,7 +12,7 @@
                 <p class="mt25">
                     {{ $post->excerpt }}
                 </p>
-                <a href="#" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
+                <a href={{route('frontend.singleBlog', $post)}} class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
 
             </div>
         @endforeach
@@ -23,3 +22,5 @@
         ===================================== -->
         {{ $posts->links('frontend.patials._pagination') }}
 @endsection
+
+

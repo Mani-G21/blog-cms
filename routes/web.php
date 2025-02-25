@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs']);
+Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs'])->name('frontend.home');
+Route::get('/blogs/{post}', [\App\Http\Controllers\BlogsController::class, 'singleBlog'])->name('frontend.singleBlog');
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
