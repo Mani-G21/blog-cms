@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs'])->name('frontend.home');
-Route::get('/blogs/{slug}', [\App\Http\Controllers\BlogsController::class, 'show'])->name('frontend.singleBlog');
+Route::get('/blogs/{slug}', [\App\Http\Controllers\BlogsController::class, 'show'])->name('frontend.show');
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
