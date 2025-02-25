@@ -12,7 +12,7 @@
                 <p class="mt25">
                     {{ $post->excerpt }}
                 </p>
-                <a href={{route('frontend.singleBlog', $post)}} class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
+                <a href={{route('frontend.singleBlog', $post->slug)}} class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
 
             </div>
         @endforeach
