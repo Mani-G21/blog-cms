@@ -106,6 +106,20 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $post->tags()->detach(
+                $post->tags
+            );
+
+                $post->delete();
+                Storage::disk('public')->delete($post->thumbnail);
+                DB::commit();
+                return redirect()->route('admin.posts.index')->with('success', 'Post deleted Successfully');
+
+        }catch(Exception $ex){
+            DB::rollBack();
+            return redirect()->route('admin.posts.index')->with('error', 'Some interanl server error occured!');
+        }
     }
 }
