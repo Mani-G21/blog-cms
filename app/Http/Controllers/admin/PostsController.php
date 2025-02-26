@@ -119,7 +119,7 @@ class PostsController extends Controller
 
         }catch(Exception $ex){
             DB::rollBack();
-            return redirect()->route('admin.posts.index')->with('error', 'Some interanl server error occured!');
+            return redirect()->route('admin.posts.index')->with('error', 'Some internal server error occured!');
         }
     }
 }
