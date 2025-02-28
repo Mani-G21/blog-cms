@@ -6,7 +6,7 @@
                 <h4 class="blog-title"><a href={{route('frontend.show', $post->slug)}} >{{ $post->title }}</a></h4>
                 <div class="blog-three-attrib">
                     <span class="icon-calendar"></span>Dec 15 2019 |
-                    <span class=" icon-pencil"></span><a href="#">John Doe</a>
+                    <span class=" icon-pencil"></span><a href="#">{{$post->author->name}}</a>
                 </div>
                 <img src="{{ asset($post->thumbnail_path) }}" class="img-responsive" alt="image blog">
                 <p class="mt25">
