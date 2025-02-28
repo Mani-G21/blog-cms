@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'thumbnail', 'category_id'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'author_id', 'body', 'thumbnail', 'category_id'];
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
@@ -30,5 +30,8 @@ class Post extends Model
         $this->attributes['slug'] = Str::slug($title);
     }
 
+    public function author() {
+        return $this->belongsTo(User::class);
+    }
 
 }
