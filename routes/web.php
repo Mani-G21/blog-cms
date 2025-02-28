@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs'])->name('frontend.home');
 Route::get('/blogs/{slug}', [\App\Http\Controllers\BlogsController::class, 'show'])->name('frontend.show');
@@ -25,3 +26,7 @@ Route::put('admin/categories/{category}', [\App\Http\Controllers\admin\Categorie
 Route::delete('admin/categories/{category}', [\App\Http\Controllers\admin\CategoriesController::class, 'destroy'])->name('admin.categories.destroy');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
