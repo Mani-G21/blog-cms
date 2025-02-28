@@ -18,7 +18,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->with('tags')->latest()->paginate(20);
+        $posts = Post::with('category')->with('tags')->where('author_id', auth()->id())->latest()->paginate(20);
         return view('admin.posts.index', compact([
             'posts'
         ]));
@@ -78,6 +78,10 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
+        if($post->author_id !== auth()->id()) {
+            abort(403);
+        }
+
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.posts.edit', compact([
