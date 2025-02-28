@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getUserProfileAttribute() {
+        $url = "https://ui-avatars.com/api/?name={$this->name}&rounded=true&bold=true";
+        return $this->profile_pic ? "storage/{$this->profile_pic}" : $url;
+    }
+
 }
