@@ -12,9 +12,19 @@
 
         <div class="navbar-collapse collapse navbar-main-collapse">
             <ul class="nav navbar-nav">
+                @auth
                 <li>
-                    <a href={{route('login')}}>Login </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-outline-secondary">Logout</button>
+                    </form>
                 </li>
+            @else
+                <li>
+                    <a href="{{ route('login') }}">Login </a>
+                </li>
+            @endauth
+
             </ul>
 
         </div>
