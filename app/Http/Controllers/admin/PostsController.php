@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -129,4 +130,51 @@ class PostsController extends Controller
             return redirect()->route('admin.posts.index')->with('error', 'Some internal server error occured!');
         }
     }
+
+    private function generatePrompt($title, $excerpt) {
+        $prompt = <<<PROMPT
+            You are a professional content writer and I want you to generate an HTML blog article with the following specifications:
+            Title: $title
+            Excerpt: $excerpt
+            Instructions:
+                * Write the article in a conversational and engaging tone.
+                * Do not include excerpt and title in the article that you write.
+                * Use appropriate HTML tags for structure such as as <p>, <h2>, <h3>, <ul>, <li>, <code>, <blockquote> and so on.
+                * Include atleast 4 headings to break the contents, and they all should be wrapped in h3 tag.
+                * Ensure the HTML code is valid and well formatted.
+                * Do not include any CSS styling.
+                * Do not include any JavaScript
+                * Focus on providing information closely related to the given title and excerpt.
+                * If applicable, include the summary or conclusion at the end of article, whose title should be wrapped in h4 tag.
+        PROMPT;
+        return $prompt;
+    }
+
+    public function generateAI(Request $request) {
+        $title = $request->title;
+        $excerpt = $request->excerpt;
+
+        $prompt = $this->generatePrompt($title, $excerpt);
+
+        $client = new Client();
+        $apiKey = env('GEMINI_API_KEY');
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$apiKey}";
+
+        $payload = [
+            'contents'=>[[
+                'parts'=>[[
+                    'text'=> $prompt
+                ]]]
+            ]
+        ];
+        $response = $client->post($url, ['json' => $payload, ['headers'=> ['Content-Type'=> 'application/json']]]);
+        Log::info("Status Code: " . $response->getStatusCode());
+        if($response->getStatusCode() === 200) {
+            $responseData = json_decode($response->getBody(), true);
+            Log::info($responseData['candidates'][0]['content']['parts'][0]['text']);
+        }
+
+        return response()->json(['content'=>$responseData['candidates'][0]['content']['parts'][0]['text'], 'status'=>200]);
+    }
+
 }
