@@ -37,11 +37,13 @@ class BlogsController extends Controller
     public function show(Request $request, String $slug)
     {
         $categories = Category::all();
+        $tags = Tag::all();
         $post = Post::where('slug', $slug)->first();
         $this->trackViewCount($post);
         return view('frontend.blog', compact([
             'post',
-            'categories'
+            'categories',
+            'tags'
         ]));
     }
 
