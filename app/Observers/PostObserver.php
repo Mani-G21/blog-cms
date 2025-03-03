@@ -32,7 +32,7 @@ class PostObserver
      */
     public function deleted(Post $post): void
     {
-        //
+        Category::where('id', $post->category_id)->decrement('posts_count');
     }
 
     /**
