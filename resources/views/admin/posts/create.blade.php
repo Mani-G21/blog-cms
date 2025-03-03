@@ -231,6 +231,40 @@
     <script>
         $('.select2').select2();
     </script>
+
+    <script>
+        document.addEventListener('trix-attachment-add', function(evt){
+            const attachment = evt.attachment;
+            uploadTrixImage(attachment);
+        })
+
+        function uploadTrixImage(attachment){
+            const formData = new FormData();
+
+            formData.append('image', attachment.file);
+
+            fetch("{{route('posts.uploadImage')}}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN" : "{{ csrf_token() }}"
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    attachment.setAttributes({
+                        url: data.url,
+                        href: data.url
+                    });
+                }else{
+                    console.error("Image uplaod failed");
+                }
+            }).catch(() => {
+                console.error("Some error occured while fetching the image from the server");
+            })
+        }
+    </script>
     <script>
 
         function generateArticleFromAI(evt) {
@@ -244,7 +278,6 @@
             // }
             let userToken = "{{ auth()->user()->user_token }}";
             loader.classList.remove('invisible');
-          
             fetch(`/api/posts/${userToken}/generate-ai`, {
                     method: 'POST',
                     headers: {

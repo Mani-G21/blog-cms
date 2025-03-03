@@ -135,6 +135,20 @@ class PostsController extends Controller
         }
     }
 
+    public function uploadImage(Request $request){
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $path = $file->store('blog_images', 'public');
+
+            return response()->json([
+                'success' => true,
+                'url' => asset('storage/'.$path)
+            ]);
+        }
+
+        return response()->json(['success' => false], 400);
+    }
+
     private function generatePrompt($title, $excerpt) {
         // if(!auth()->user()->canGenerateArticle()){
         //     return response()->json(['content' => 'You have reached your AI Article Generation Limit!', 'status' => 401]);
