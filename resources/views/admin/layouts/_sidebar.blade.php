@@ -71,8 +71,10 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @can('viewAny', \App\Models\Post::class)
     <li class="nav-item {{ \App\Helpers\RoutingHelper::isPostRoute() ? 'active' : '' }}">
-        <a class="nav-link {{ \App\Helpers\RoutingHelper::isPostRoute() ? '' : 'collapsed' }}" href="#"
+
+    <a class="nav-link {{ \App\Helpers\RoutingHelper::isPostRoute() ? '' : 'collapsed' }}" href="#"
             data-toggle="collapse" data-target="#collapsePost" aria-expanded="true" aria-controls="collapsePost">
             <i class="fas fa-fw fa-cog"></i>
             <span>Post</span>
@@ -92,6 +94,7 @@
             </div>
         </div>
     </li>
+    @endcan
 
 
     <!-- Divider -->

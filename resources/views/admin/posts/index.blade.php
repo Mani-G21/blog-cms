@@ -35,13 +35,17 @@
                                     <td>{{ $post->category->name }}</td>
                                     <td>{{ implode(', ', $post->tags->pluck('name')->toArray()) }}</td>
                                     <td>
+                                        @can('update', $post)
                                         <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-outline-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <button class="btn btn-outline-danger delete-post" data-toggle="modal"
-                                            data-target="#deleteModal" data-post-id="{{ $post->id }}">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        data-target="#deleteModal" data-post-id="{{ $post->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    @endcan
+
+
                                     </td>
                                 </tr>
                             @endforeach
