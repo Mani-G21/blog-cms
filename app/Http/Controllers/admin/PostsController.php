@@ -8,12 +8,15 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Exception;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
+
+use function Illuminate\Log\log;
 
 class PostsController extends Controller
 {
@@ -132,6 +135,9 @@ class PostsController extends Controller
     }
 
     private function generatePrompt($title, $excerpt) {
+        // if(!auth()->user()->canGenerateArticle()){
+        //     return response()->json(['content' => 'You have reached your AI Article Generation Limit!', 'status' => 401]);
+        // }
         $prompt = <<<PROMPT
             You are a professional content writer and I want you to generate an HTML blog article with the following specifications:
             Title: $title
@@ -150,7 +156,11 @@ class PostsController extends Controller
         return $prompt;
     }
 
-    public function generateAI(Request $request) {
+    public function generateAI(Request $request, $token) {
+        $user = User::where('user_token', $token)->firstOrFail();
+        if(!$user->canGenerateArticle()){
+            return response()->json(['content' => "You have reached your ai artice generation limit", 'status' => 401]);
+        }
         $title = $request->title;
         $excerpt = $request->excerpt;
 
@@ -167,14 +177,25 @@ class PostsController extends Controller
                 ]]]
             ]
         ];
-        $response = $client->post($url, ['json' => $payload, ['headers'=> ['Content-Type'=> 'application/json']]]);
-        Log::info("Status Code: " . $response->getStatusCode());
+
+        $response = $client->post($url, [
+            'json' => $payload,
+            [
+                'headers'=> ['Content-Type'=> 'application/json']
+            ]
+        ]);
+
         if($response->getStatusCode() === 200) {
             $responseData = json_decode($response->getBody(), true);
             Log::info($responseData['candidates'][0]['content']['parts'][0]['text']);
+
+            $user->activeSubscription()?->decrement('articles_remaining');
+            $user->increment('articles_generated');
+            return response()->json(['content' =>$responseData['candidates'][0]['content']['parts'][0]['text'], 'status' => 200]);
+
         }
 
-        return response()->json(['content'=>$responseData['candidates'][0]['content']['parts'][0]['text'], 'status'=>200]);
-    }
+        return response()->json(['content'=>"Some issue with our AI model", 'status'=>403]);
+}
 
 }
