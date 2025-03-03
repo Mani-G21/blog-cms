@@ -8,7 +8,35 @@
         .is-invalid+.select2>.selection>.select2-selection.select2-selection--multiple {
             border: solid 1px red;
         }
+
+        .progress {
+          height: 4.5px;
+          width: 100%;
+          background: linear-gradient(#474bff 0 0),
+            linear-gradient(#474bff 0 0),
+            #dbdcef;
+          background-size: 60% 100%;
+          background-repeat: no-repeat;
+          animation: progress-7x9cg2 3s infinite;
+        }
+
+        @keyframes progress-7x9cg2 {
+          0% {
+            background-position: -150% 0, -150% 0;
+          }
+
+          66% {
+            background-position: 250% 0, -150% 0;
+          }
+
+          100% {
+            background-position: 250% 0, 250% 0;
+          }
+        }
     </style>
+
+
+
 @endsection
 
 
@@ -41,6 +69,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="body" class="form-label">Body</label>
+
                             <trix-toolbar id="my_toolbar">
                                 <div class="trix-button-row">
                                     <span class="trix-button-group trix-button-group--text-tools"
@@ -131,12 +160,19 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="progress invisible" id="progressBar">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
                             </trix-toolbar>
 
-                            <trix-editor input="body" toolbar="my_toolbar"></trix-editor>
+
+                            <trix-editor input="body" toolbar="my_toolbar" ></trix-editor>
+
 
                             <input type="hidden" class="form-control @error('body')is-invalid @enderror" name="body"
-                                id="body" value="{{ old('body') }}" />
+                                id="body" value="{{ old('body') }}"/>
                             @error('body')
                                 <span class="text-danger text-sm">{{ $message }}</span>
                             @enderror
@@ -196,32 +232,39 @@
         $('.select2').select2();
     </script>
     <script>
+
         function generateArticleFromAI(evt) {
             const title = document.getElementById('title').value;
             const excerpt = document.getElementById('excerpt').value;
             const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
+            const loader = document.getElementById('progressBar');
             // if(!title || !excerpt) {
             //     alert("You need to fill title and excerpt for AI to generate the content.");
             //     return;
             // }
             let userToken = "{{ auth()->user()->user_token }}";
-            
+            loader.classList.remove('invisible');
+          
             fetch(`/api/posts/${userToken}/generate-ai`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ title, excerpt})
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({
+                        title,
+                        excerpt
+                    })
+                })
                 .then(res => res.json())
                 .then(data => {
-                    document.querySelector('trix-editor').editor.insertHTML(data.content);
+
+                    loader.classList.add('invisible');
+
+                    document.querySelector('trix-editor').editor.loadHTML(data.content);
                 })
                 .catch(err => console.warn(err));
         }
         document.getElementById('generateArticleFromAI').addEventListener('click', generateArticleFromAI);
     </script>
-
 @endsection
