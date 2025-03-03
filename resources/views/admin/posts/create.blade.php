@@ -69,7 +69,6 @@
                         </div>
                         <div class="mb-3">
                             <label for="body" class="form-label">Body</label>
-
                             <trix-toolbar id="my_toolbar">
                                 <div class="trix-button-row">
                                     <span class="trix-button-group trix-button-group--text-tools"
