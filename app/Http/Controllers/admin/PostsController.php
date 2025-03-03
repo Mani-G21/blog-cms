@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Mail\NewBlogNotification;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Mail;
 
 use function Illuminate\Log\log;
 
@@ -60,6 +62,10 @@ class PostsController extends Controller
             $post->tags()->attach($request->tags);
 
             DB::commit();
+
+            Mail::to('mani@gmail.com')
+                 ->send(new NewBlogNotification($post));
+                 
             return redirect()->route('admin.posts.index')
                 ->with('success', 'Post created successfully!');
         } catch (Exception $e) {

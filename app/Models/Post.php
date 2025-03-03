@@ -34,4 +34,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getUrlAttribute(){
+        return asset("blogs/{$this->slug}");
+    }
+
 }
