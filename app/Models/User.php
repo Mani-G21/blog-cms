@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_token'
     ];
 
     /**
@@ -51,4 +52,18 @@ class User extends Authenticatable
         return $this->profile_pic ? "storage/{$this->profile_pic}" : $url;
     }
 
+    public function subscriptions(){
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function activeSubscription(){
+        return $this->subscriptions()->where('status', 'active')->first();
+    }
+
+    public function canGenerateArticle(){
+        if(!$this->activeSubscription()){
+            return $this->articles_generated < 3;
+        }
+        return $this->activeSubscription()->articles_remaining > 0;
+    }
 }
