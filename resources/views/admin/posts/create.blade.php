@@ -205,8 +205,9 @@
             //     alert("You need to fill title and excerpt for AI to generate the content.");
             //     return;
             // }
-
-            fetch('/api/posts/generate-ai', {
+            let userToken = "{{ auth()->user()->user_token }}";
+            
+            fetch(`/api/posts/${userToken}/generate-ai`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
