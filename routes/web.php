@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubscriptionsController;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +22,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::put('categories/{category}', [\App\Http\Controllers\admin\CategoriesController::class, 'update'])->name('categories.update');
     Route::delete('categories/{category}', [\App\Http\Controllers\admin\CategoriesController::class, 'destroy'])->name('categories.destroy');
 
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware(['auth'])->group(function(){
