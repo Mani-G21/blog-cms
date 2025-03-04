@@ -13,8 +13,6 @@ use Stripe\Stripe;
 
 class SubscriptionsController extends Controller
 {
-
-
     public function showPlans() {
         $plans = Plan::all();
         $categories = Category::all();
