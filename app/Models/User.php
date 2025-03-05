@@ -66,4 +66,6 @@ class User extends Authenticatable
         }
         return $this->activeSubscription()->articles_remaining > 0;
     }
+
+    
 }

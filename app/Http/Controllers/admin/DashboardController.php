@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -39,5 +41,12 @@ class DashboardController extends Controller
             'articlesRemaining',
             'planName'
         ]));
+    }
+
+    public function logout(){
+        User::find(auth()->user()->id)->update(['user_token' => null]);
+        Auth::logout();
+        route('login');
+        return view('auth.login');
     }
 }

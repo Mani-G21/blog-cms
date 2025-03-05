@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 @auth
                 <li>
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-outline-secondary">Logout</button>
                     </form>
