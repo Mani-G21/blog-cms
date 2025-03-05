@@ -70,7 +70,7 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    @can('viewAny', \App\Models\Post::class)
+    @can('view', \App\Models\Post::class)
     <li class="nav-item {{ \App\Helpers\RoutingHelper::isPostRoute() ? 'active' : '' }}">
 
     <a class="nav-link {{ \App\Helpers\RoutingHelper::isPostRoute() ? '' : 'collapsed' }}" href="#"

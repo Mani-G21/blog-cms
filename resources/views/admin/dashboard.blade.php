@@ -146,7 +146,8 @@
                                 class="float-right">{{ $post->view_count }} / {{ $viewCount }}</span></h4>
                         <div class="progress mb-4">
                             <div class="progress-bar bg-danger" role="progressbar"
-                                style="width: {{ ($post->view_count / $viewCount) * 100 }}%" aria-valuenow="20"
+                            style="{{ $viewCount != 0 ? 'width:' . ($post->view_count / $viewCount) * 100 . '%' : 'width:0%' }}"
+                            aria-valuenow="20"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     @endforeach

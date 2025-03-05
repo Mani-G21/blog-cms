@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
 use function Illuminate\Log\log;
@@ -25,8 +26,12 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', Post::class);
-        $posts = Post::with('category')->with('tags')->latest()->paginate(20);
+        if(Gate::allows('viewAny', \App\Models\Post::class)){
+            $posts = Post::with('category')->with('tags')->latest()->paginate(20);
+        }else{
+            $posts = Post::where('author_id', auth()->user()->id)->latest()->paginate(20);
+        }
+
         return view('admin.posts.index', compact([
             'posts'
         ]));
