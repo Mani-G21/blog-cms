@@ -4,8 +4,10 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Categories</h1>
+        @can('create', \App\Models\Category::class)
         <a href="/admin/categories/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-cog fa-sm text-white-50"></i> Create Category</a>
+            class="fas fa-cog fa-sm text-white-50"></i> Create Category</a>
+        @endcan
     </div>
     @include('admin.layouts._alerts')
     <div class="card">
@@ -16,13 +18,16 @@
                         <thead>
                             <th>Id</th>
                             <th>Name</th>
+                            @can('update', \App\Models\Category::class)
                             <th>Actions</th>
+                            @endcan
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
+                                    @can('update', \App\Models\Category::class)
                                     <td>
                                         <a href="{{ route('admin.categories.edit', $category->id) }}"
                                             class="btn btn-outline-warning">
@@ -34,6 +39,7 @@
                                         </button>
 
                                     </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                         </tbody>

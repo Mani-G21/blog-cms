@@ -41,9 +41,10 @@
                 <h6 class="collapse-header">Category Operations:</h6>
                 <a class="collapse-item {{ \App\Helpers\RoutingHelper::isCategoryIndex() ? 'active' : '' }}"
                     href="{{ route('admin.categories.index') }}">Show All</a>
-                <a class="collapse-item {{ \App\Helpers\RoutingHelper::isCategoryCreate() ? 'active' : '' }}"
+                @can('create', \App\Models\Category::class)
+                    <a class="collapse-item {{ \App\Helpers\RoutingHelper::isCategoryCreate() ? 'active' : '' }}"
                     href="{{ route('admin.categories.create') }}">Create Category</a>
-
+                @endcan
             </div>
         </div>
     </li>

@@ -17,6 +17,7 @@ class CategoriesController extends Controller
     }
 
     public function create(){
+        $this->authorize('view', \App\Models\Category::class);
         return view('admin.categories.create');
     }
 
@@ -29,12 +30,14 @@ class CategoriesController extends Controller
     }
 
     public function edit(Request $request, Category $category){
+        $this->authorize('update', \App\Models\Category::class);
         return view('admin.categories.edit', compact([
             'category'
         ]));
     }
 
     public function update(Request $request, Category $category){
+        $this->authorize('update', \App\Models\Category::class);
         $validated = $request->validate([
             'name' => 'required|min:3|max:255|unique:categories,name,'.$category->id
         ]);
@@ -43,6 +46,7 @@ class CategoriesController extends Controller
     }
 
     public function destroy(Category $category) {
+        $this->authorize('update', \App\Models\Category::class);
         $category->delete();
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category Deleted Successfully!');
