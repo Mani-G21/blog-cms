@@ -46,7 +46,6 @@ class DashboardController extends Controller
     public function logout(){
         User::find(auth()->user()->id)->update(['user_token' => null]);
         Auth::logout();
-        route('login');
-        return view('auth.login');
+        return redirect('login');
     }
 }
