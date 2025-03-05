@@ -25,6 +25,7 @@ class TagsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', \App\Models\Tag::class);
         return view('admin.tags.create');
     }
 
@@ -45,6 +46,7 @@ class TagsController extends Controller
      */
     public function edit(Tag $tag)
     {
+        $this->authorize('update', \App\Models\Tag::class);
         return view('admin.tags.edit', compact([
             'tag'
         ]));

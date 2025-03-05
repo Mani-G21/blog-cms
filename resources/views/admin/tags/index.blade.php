@@ -4,8 +4,12 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Tags</h1>
+
+        @can('update', \App\Models\Tag::class)
         <a href="/admin/tags/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-cog fa-sm text-white-50"></i> Create Tag</a>
+            class="fas fa-cog fa-sm text-white-50"></i> Create Tag</a>
+    @endcan
+
     </div>
     @include('admin.layouts._alerts')
     <div class="card">
@@ -16,13 +20,18 @@
                         <thead>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Actions</th>
+                            @can('update', \App\Models\Tag::class)
+                                <th>Actions</th>
+                            @endcan
                         </thead>
                         <tbody>
                             @foreach ($tags as $tag)
                                 <tr>
                                     <td>{{ $tag->id }}</td>
                                     <td>{{ $tag->name }}</td>
+
+                                    @can('update', \App\Models\Tag::class)
+
                                     <td>
                                         <a href="{{ route('admin.tags.edit', $tag->id) }}"
                                             class="btn btn-outline-warning">
@@ -34,6 +43,8 @@
                                         </button>
 
                                     </td>
+                                    @endcan
+
                                 </tr>
                             @endforeach
                         </tbody>

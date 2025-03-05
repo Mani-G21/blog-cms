@@ -60,9 +60,10 @@
                 <h6 class="collapse-header">Tag Operations:</h6>
                 <a class="collapse-item {{ \App\Helpers\RoutingHelper::isTagIndex() ? 'active' : '' }}"
                     href="{{ route('admin.tags.index') }}">Show All</a>
-                <a class="collapse-item {{ \App\Helpers\RoutingHelper::isTagCreate() ? 'active' : '' }}"
-                    href="{{ route('admin.tags.create') }}">Create Tag</a>
-
+                    @can('update', \App\Models\Tag::class)
+                        <a class="collapse-item {{ \App\Helpers\RoutingHelper::isTagCreate() ? 'active' : '' }}"
+                        href="{{ route('admin.tags.create') }}">Create Tag</a>
+                    @endcan
             </div>
         </div>
     </li>
