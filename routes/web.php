@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubscriptionsController;
+use App\Http\Controllers\CommentsController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs'])->name('frontend.home');
 Route::get('/blogs/{slug}', [\App\Http\Controllers\BlogsController::class, 'show'])->name('frontend.show');
 Route::get('/blogs/categories/{category}', [\App\Http\Controllers\BlogsController::class, 'showByCategory'])->name('frontend.showByCategory');
+Route::post('/comments', [CommentsController::class, 'store'])->name('comment.store');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('tags', \App\Http\Controllers\admin\TagsController::class)->except(['show']);

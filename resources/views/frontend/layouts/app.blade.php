@@ -97,5 +97,6 @@
 <script src="{{ asset('frontend/assets/js/main/imagesloaded.pkgd.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/main/main.js') }}"></script>
 
+@yield('page-level-scripts')
 </body>
 </html>
