@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Post;
 use App\Models\Reply;
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class RepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,20 +28,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->on){
-            Reply::insert(['comment_id' => $request->on, 'sender' => $request->name, 'content' => $request->message, 'created_at' => now(), 'updated_at' => now()]);
-        }
-        else{
-            Comment::insert(['post_id' => $request->postId, 'on' => $request->on, 'sender' => $request->name, 'content' => $request->message, 'created_at' => now(), 'updated_at' => now()]);
-        }
-
-       return redirect()->route('frontend.show', Post::find($request->postId)->slug);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(Reply $reply)
     {
         //
     }
@@ -51,16 +42,15 @@ class CommentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
+    public function edit(Reply $reply)
     {
         //
     }
 
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Reply $reply)
     {
         //
     }
@@ -68,7 +58,7 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(Reply $reply)
     {
         //
     }
