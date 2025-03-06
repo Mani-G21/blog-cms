@@ -15,6 +15,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('tags', \App\Http\Controllers\admin\TagsController::class)->except(['show']);
     Route::resource('posts', \App\Http\Controllers\admin\PostsController::class);
     Route::resource('users', \App\Http\Controllers\admin\UsersController::class);
+    Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::get('categories', [\App\Http\Controllers\admin\CategoriesController::class, 'index'])->name('categories.index');
     Route::get('categories/create', [\App\Http\Controllers\admin\CategoriesController::class, 'create'])->name('categories.create');
     Route::post('categories', [\App\Http\Controllers\admin\CategoriesController::class, 'store'])->name('categories.store');

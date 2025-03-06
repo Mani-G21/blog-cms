@@ -48,4 +48,8 @@ class DashboardController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+    public function profile(){
+        return view('admin.profile.edit');
+    }
 }
