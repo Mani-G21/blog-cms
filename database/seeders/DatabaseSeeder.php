@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\User;
+use Database\Factories\CommentFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +21,6 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             PostSeeder::class,
         ]);
+        Comment::factory(10)->create();
     }
 }
