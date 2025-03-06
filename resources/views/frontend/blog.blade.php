@@ -1,5 +1,39 @@
 @extends('frontend.layouts.app')
+@section('page-level-styles')
+<style>
+    .is-invalid+.select2>.selection>.select2-selection.select2-selection--multiple {
+        border: solid 1px red;
+    }
+
+    .progress {
+      height: 4.5px;
+      width: 100%;
+      background: linear-gradient(#ff4530 0 0),
+        linear-gradient(#ff4530 0 0),
+        #dbdcef;
+      background-size: 60% 100%;
+      background-repeat: no-repeat;
+      animation: progress-7x9cg2 3s infinite;
+    }
+
+    @keyframes progress-7x9cg2 {
+      0% {
+        background-position: -150% 0, -150% 0;
+      }
+
+      66% {
+        background-position: 250% 0, -150% 0;
+      }
+
+      100% {
+        background-position: 250% 0, 250% 0;
+      }
+    }
+</style>
+@endsection
 @section('main-content')
+@include('admin.layouts._alerts')
+
     <div class="blog-three-mini">
         <h2 class="color-dark">
             <a href="#">{{ $post->title }}</a>
@@ -79,19 +113,31 @@
         <div class="blog-post-leave-comment" id="leaveComment">
             <h5><i class="fa fa-comment mt25 mb25"></i> Leave Comment</h5>
 
-            <form action="{{route('comment.store')}}" method="POST">
+            <form action="{{route('comment.store')}}" method="POST" id="commentForm">
                 @csrf
                 <input type="text" class="disabled invisible" name="on" value="" id="repliesTo">
                 <input type="text" class="disabled invisible" name="postId" value={{$post->id}} id="postId">
-                <input type="text" name="name" class="blog-leave-comment-input" placeholder="name" required>
-                <textarea name="message" class="blog-leave-comment-textarea"></textarea>
-                <button class="button button-pasific button-sm center-block mb25" type="submit">Leave Comment</button>
+                <input type="text" name="name" class="blog-leave-comment-input" placeholder="name" required id="sender">
+
+                <textarea name="message" class="blog-leave-comment-textarea" id="commentBody" required>
+
+                </textarea>
+
+                <p class="invisible alert" style="color: red" id="inappropirateComment">This comment violates our terms and conditions! Please dont write inappropriate message*</p>
+                <p class="invisible alert" style="color: red" id="emptyComment">Comment and name both are required!*</p>
+                <div class="progress m-0 invisible" id="progressBar">
+                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+
+
+                <button class="button button-pasific button-sm center-block mb25" type="submit" id="leaveCommentButton">Leave Comment</button>
             </form>
 
         </div>
 
     </div>
 @endsection
+
 @section('page-level-scripts')
     <script>
         const replyLinks = (document.querySelectorAll('.reply'));
@@ -102,4 +148,47 @@
             })
         });
     </script>
+    <script>
+        function validateCommentFromAI(evt) {
+            evt.preventDefault();
+            const loader = document.getElementById('progressBar');
+            const inappropriateSpan = document.getElementById('inappropirateComment');
+            const emptySpan = document.getElementById('emptyComment');
+            const sender = document.getElementById('sender');
+
+            inappropriateSpan.classList.add('invisible');
+            loader.classList.remove('invisible');
+            emptySpan.classList.add('invisible');
+            const comment = document.getElementById('commentBody').value.trim();
+
+            if (!comment || !sender.value) {
+                emptySpan.classList.remove('invisible');
+                loader.classList.add('invisible');
+                return;
+            }
+
+            fetch(`/api/comment/validate-ai`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ comment })
+            })
+            .then(res => res.json())
+            .then(data => {
+                loader.classList.add('invisible');
+                if (data.content == "TRUE\n") {
+                    document.getElementById("commentForm").submit();
+                } else {
+                    console.log(inappropriateSpan);
+                    inappropriateSpan.classList.remove('invisible');
+                }
+            })
+            .catch(err => console.log("Error:", err));
+        }
+
+
+        document.getElementById('leaveCommentButton').addEventListener('click', validateCommentFromAI);
+        </script>
+
 @endsection

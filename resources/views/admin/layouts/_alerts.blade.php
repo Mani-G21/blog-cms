@@ -1,5 +1,5 @@
 @if(session()->has('success'))
-    <div class="alert alert-success fade show">
+    <div style="background-color: rgb(140, 235, 140); padding:10px; border: 1px solid green; border-radius: 10px">
         {{ session('success') }}
     </div>
 @endif
