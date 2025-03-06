@@ -38,4 +38,8 @@ class Post extends Model
         return asset("blogs/{$this->slug}");
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
 }
