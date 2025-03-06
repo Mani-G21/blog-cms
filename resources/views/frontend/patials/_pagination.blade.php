@@ -16,11 +16,11 @@
 
         @if($paginator->hasMorePages())
             <div class="col-md-6">
-                <a href="{{ $paginator->nextPageUrl() }}" class="button button-sm button-pasific pull-right hover-skew-forward">New Entries</a>
+                <a href="{{ $paginator->nextPageUrl() }}" class="button button-sm button-pasific pull-right hover-skew-forward">Previous</a>
             </div>
         @else
             <div class="col-md-6">
-                <a href="#" class="button button-sm button-pasific pull-right hover-skew-forward disabled">New Entries</a>
+                <a href="#" class="button button-sm button-pasific pull-right hover-skew-forward disabled">Next</a>
             </div>
         @endif
     </div>
