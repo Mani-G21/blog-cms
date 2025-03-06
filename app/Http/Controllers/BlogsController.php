@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -39,11 +40,15 @@ class BlogsController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $post = Post::where('slug', $slug)->first();
+        $comments = Comment::with('replies')->where('post_id', $post->id)->get()->toArray();
+
         $this->trackViewCount($post);
         return view('frontend.blog', compact([
             'post',
             'categories',
-            'tags'
+            'tags',
+            'comments',
+
         ]));
     }
 
