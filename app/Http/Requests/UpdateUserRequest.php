@@ -24,7 +24,12 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255|min:3',
             'email' => 'required|email|max:50|unique:users,email,'.$this->user?->id,
-
+            'country' => 'required|min:3|max:255|string',
+            'education' => 'required|min:3|max:255|string',
+            'experience' => 'required|min:3|max:255|string',
+            'state' => 'required|min:3|max:255|string',
+            'bio' => 'required|min:3|max:500|string',
+            'profile_pic' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 }

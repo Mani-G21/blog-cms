@@ -29,7 +29,7 @@
 
     </div>
     <div class="blog-post-author mb50 pt30 bt-solid-1">
-        <img src="{{ $post->author->user_profile }}" class="img-circle" alt="image">
+        <img src="{{ asset($post->author->user_profile) }}" class="img-circle" alt="image" height="70px">
         <span class="blog-post-author-name">{{$post->author->name}}</span> <a href="https://twitter.com/booisme"><i class="fa fa-twitter"></i></a>
         <p>
             Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.

@@ -17,12 +17,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'user_token'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,25 +42,30 @@ class User extends Authenticatable
         ];
     }
 
-    public function getUserProfileAttribute() {
+    public function getUserProfileAttribute()
+    {
+
         $url = "https://ui-avatars.com/api/?name={$this->name}&rounded=true&bold=true";
+
+
         return $this->profile_pic ? "storage/{$this->profile_pic}" : $url;
     }
 
-    public function subscriptions(){
+    public function subscriptions()
+    {
         return $this->hasMany(Subscription::class);
     }
 
-    public function activeSubscription(){
+    public function activeSubscription()
+    {
         return $this->subscriptions()->where('status', 'active')->first();
     }
 
-    public function canGenerateArticle(){
-        if(!$this->activeSubscription()){
+    public function canGenerateArticle()
+    {
+        if (!$this->activeSubscription()) {
             return $this->articles_generated < 3;
         }
         return $this->activeSubscription()->articles_remaining > 0;
     }
-
-    
 }
