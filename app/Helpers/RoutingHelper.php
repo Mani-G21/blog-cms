@@ -57,4 +57,8 @@ class RoutingHelper
         return Route::is(['admin.posts.edit']);
     }
 
+    public static function isUsersRoute(){
+        return Route::is(['admin.users.index']);
+    }
+
 }

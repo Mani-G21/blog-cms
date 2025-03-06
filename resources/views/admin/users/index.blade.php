@@ -17,6 +17,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th>Actions</th>
                         </thead>
 
@@ -25,8 +26,11 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
 
-                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        <img src="{{ asset($user->user_profile) }}" class="img-circle" alt="image" height="40px">
+                                        {{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
 
                                     <td>
                                         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-outline-warning">
@@ -60,7 +64,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you wanna delete this user?</p>
+                        <p>Are you sure you wanna delete this user? All the posts made by this user will also be removed!</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

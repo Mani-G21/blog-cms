@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Post;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,10 +16,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(25);
-        return view('admin.users.index', compact([
-            'users'
-        ]));
+        if (auth()->user()->role === 'admin') {
+            $users = User::latest()->paginate(25);
+            return view('admin.users.index', compact([
+                'users'
+            ]));
+        } else {
+            abort(403, "THIS ACTION IS UNAUTHORIZED");
+        }
     }
 
     /**
@@ -49,18 +55,26 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact([
-            'user',
-        ]));
+        if (auth()->user()->role === 'admin') {
+            return view('admin.users.edit', compact([
+                'user',
+            ]));
+        } else {
+            abort(403, "THIS ACTION IS UNAUTHORIZED");
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        $user->update($request->validated());
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
+        if (auth()->user()->role === 'admin') {
+            $user->update(['role' => $request->role]);
+            return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
+        } else {
+            abort(403, "THIS ACTION IS UNAUTHORIZED");
+        }
     }
 
     /**
@@ -68,7 +82,16 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'User Deleted Successfully!');
+        if (auth()->user()->role === 'admin') {
+            Post::all()->where('author_id', $user->id)->each(function ($post) {
+                $post->tags()->detach($post->tags);
+                $post->delete();
+            });
+            Subscription::where('user_id', $user->id)->delete();
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success', 'User Deleted Successfully!');
+        } else {
+            abort(403, "THIS ACTION IS UNAUTHORIZED");
+        }
     }
 }
