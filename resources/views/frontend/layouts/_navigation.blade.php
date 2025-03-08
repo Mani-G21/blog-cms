@@ -4,7 +4,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">
+            <a class="navbar-brand page-scroll" href={{route('frontend.home')}}>
                 <img src={{asset("frontend/assets/img/logo/logo-default.png")}} alt="logo">
                 Pen-It
             </a>

@@ -2,7 +2,7 @@
 @section('main-content')
     <div class="row">
         <div class="col-md-12">
-            <h2>All Posts of Category: <strong>{{ $category->name }}</strong></h2>
+            <h2>All Posts of Tag: <strong>{{ $tag->name }}</strong></h2>
         </div>
     </div>
     <div style="display: flex; flex-wrap:wrap;">

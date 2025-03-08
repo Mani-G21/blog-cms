@@ -77,4 +77,22 @@ class BlogsController extends Controller
             'tags'
         ]));
     }
+
+    public function showByTag(Request $request, $slug)
+    {
+
+        $tag = Tag::where('slug', '=', $slug)->firstOrFail();
+
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        $posts = $tag->posts()->latest()->simplePaginate(9);
+
+        return view ('frontend.tags', compact([
+            'tag',
+            'posts',
+            'categories',
+            'tags'
+        ]));
+    }
 }
