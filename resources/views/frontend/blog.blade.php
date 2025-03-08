@@ -44,17 +44,10 @@
             $dt = new DateTimeImmutable($post->created_at);
             $createdAt = $dt->format('Y-m-d');
             ?>
-            {{$createdAt}}
+            {{$createdAt}} |
             <div><i class="fa fa-pencil"></i><a href={{route('frontend.showUser', $post->author_id)}}>{{$userName}}</a></div> |
-            <div><i class="fa fa-comment-o"></i><a href="#">90 Comments</a></div> |
-            <div><a href="#"><i class="fa fa-thumbs-o-up"></i></a>150 Likes</div> |
-            <div>
-                Share: <a href="#"><i class="fa fa-facebook-official"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-pinterest"></i></a>
-            </div>
+            <div><i class="fa fa-comment-o"></i><a href="#comments">{{count($comments)}} comments </a></div> |
+            <div><a href="#"><i class="fa fa-thumbs-o-up"></i></a>{{$post->view_count. " views "}} </div> |
         </div>
 
         <img src="{{ asset($post->thumbnail_path) }}" alt="Blog Image" class="img-responsive">
@@ -67,7 +60,7 @@
         </div>
 
     </div>
-    <div class="blog-post-comment-container">
+    <div class="blog-post-comment-container" id="comments">
         <h5><i class="fa fa-comments-o mb25"></i> {{" ".count($comments)." Comments"}}</h5>
 
 
