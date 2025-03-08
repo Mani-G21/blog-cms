@@ -32,7 +32,7 @@
                                         <img src="{{env('APP_URL')}}/storage/{{ $post->thumbnail }}" alt="{{ $post->title }}" class="img-fluid">
                                     </td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->category->name }}</td>
+                                    <td>{{ ($post->category) ? $post->category->name : "" }}</td>
                                     <td>{{ implode(', ', $post->tags->pluck('name')->toArray()) }}</td>
                                     <td>
                                         @can('update', $post)
