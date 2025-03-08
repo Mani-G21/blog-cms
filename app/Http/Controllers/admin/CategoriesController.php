@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -47,7 +48,14 @@ class CategoriesController extends Controller
 
     public function destroy(Category $category) {
         $this->authorize('update', \App\Models\Category::class);
+
+        Post::where('category_id', $category->id)->each(function($post){
+            $post->category_id = null;
+            $post->save();
+        });
+
         $category->delete();
+
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category Deleted Successfully!');
     }

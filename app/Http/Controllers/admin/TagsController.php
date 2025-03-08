@@ -67,7 +67,12 @@ class TagsController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        $tag->posts->each(function($post) use ($tag){
+            $post->tags()->detach($tag);
+            $post->save();
+        });
         $tag->delete();
+
         return redirect()->route('admin.tags.index')->with('success', 'Tag Deleted Successfully!');
     }
 }
