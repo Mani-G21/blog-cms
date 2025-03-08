@@ -68,7 +68,7 @@
             <div class='blog-post-comment'>
                 <img src="https://ui-avatars.com/api/?name={{$comment['sender']}}&rounded=true&bold=true" class="img-circle"
                     alt="image" height="40px">
-                <span class="blog-post-comment-name">{{$comment['sender']}}</span>
+                <span class="blog-post-comment-name" data-comment-sender="{{$comment['sender']}}" id="commentSender{{$comment['id']}}">{{$comment['sender']}}</span>
                 <?php
                 $dt = new DateTimeImmutable($comment['created_at']);
                 $commentDate = $dt->format('Y-m-d');
@@ -76,7 +76,9 @@
                 <span class="blog-post-comment-date">{{$commentDate}}</span>
                 <a href="#leaveComment"
                     data-refers-to="{{$comment['id']}}"
-                    class="pull-right text-gray reply"><i class="fa fa-comment"></i> Reply
+                    class="pull-right text-gray reply"
+                    id="comment.{{$comment['id']}}"
+                    ><i class="fa fa-comment"></i> Reply
                 </a>
                 <p style="margin-left: 6rem">
                     {{ $comment['content'] }}
@@ -106,10 +108,14 @@
             @endif
         @endforeach
 
-        {{-- {{ $comments->links('frontend.patials._pagination') }} --}}
+
 
         <div class="blog-post-leave-comment" id="leaveComment">
             <h5><i class="fa fa-comment mt25 mb25"></i> Leave Comment</h5>
+
+
+                <h5 id="replyingToText" class="invisible">Replying to :  <pre id="replyingTo">mani</pre></h5>
+
 
             <form action="{{route('comment.store')}}" method="POST" id="commentForm">
                 @csrf
@@ -139,10 +145,15 @@
 @section('page-level-scripts')
     <script>
         const replyLinks = (document.querySelectorAll('.reply'));
+        const replyingTo = document.getElementById("replyingTo");
+        const replyingToText = document.getElementById("replyingToText");
+
         replyLinks.forEach(replyLink => {
             replyLink.addEventListener('click', function(e){
 
                 document.getElementById('repliesTo').value = e.target.dataset.refersTo;
+                replyingTo.innerHTML = document.getElementById("commentSender"+e.target.dataset.refersTo).innerHTML;
+                replyingToText.classList.remove("invisible");
             })
         });
     </script>
