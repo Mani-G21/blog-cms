@@ -12,6 +12,7 @@ Route::get('/', [\App\Http\Controllers\BlogsController::class, 'blogs'])->name('
 Route::get('/blogs/{slug}', [\App\Http\Controllers\BlogsController::class, 'show'])->name('frontend.show');
 Route::get('/blogs/categories/{category}', [\App\Http\Controllers\BlogsController::class, 'showByCategory'])->name('frontend.showByCategory');
 Route::get('/blogs/tags/{tag}', [\App\Http\Controllers\BlogsController::class, 'showByTag'])->name('frontend.showByTag');
+Route::get('/authors/{user}', [\App\Http\Controllers\BlogsController::class, 'showUser'])->name('frontend.showUser');
 Route::post('/comments', [CommentsController::class, 'store'])->name('comment.store');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {

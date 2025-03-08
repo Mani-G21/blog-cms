@@ -30,6 +30,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/color/pasific.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/icon/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/icon/et-line-font.css') }}">
+    <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @yield('page-level-styles')
     <!-- Load JS
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -93,6 +94,26 @@ class BlogsController extends Controller
             'posts',
             'categories',
             'tags'
+        ]));
+    }
+
+    public function showUser(Request $request, User $user){
+
+        $posts = Post::where('author_id', $user->id)->orderBy('view_count', 'desc');
+        $famousPost = $posts->first();
+        $posts = $posts->latest()->simplePaginate(9);
+        $viewCount = $posts->sum('view_count');
+
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('frontend.user', compact([
+            'categories',
+            'tags',
+            'posts',
+            'viewCount',
+            'user',
+            'famousPost'
         ]));
     }
 }

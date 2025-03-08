@@ -13,8 +13,13 @@
                         <h4 class="blog-title"><a href={{ route('frontend.show', $post->slug) }}>{{ $post->title }}</a></h4>
                     </div>
                     <div class="blog-three-attrib">
-                        <span class="icon-calendar"></span>Dec 15 2019 |
-                        <span class=" icon-pencil"></span><a href="#">{{ $post->author->name }}</a>
+                        <span class="icon-calendar"></span>
+                        <?php
+                        $dt = new DateTimeImmutable($post->created_at);
+                        $createdAt = $dt->format('Y-m-d');
+                        ?>
+                        {{$createdAt}}
+                        <span class=" icon-pencil"></span><a href={{route('frontend.showUser', $post->author_id)}}>{{ $post->author->name }}</a>
                     </div>
                     <div style="height:50%">
                         <img style="width: 100%; height: 100%;" src="{{ asset($post->thumbnail_path) }}" alt="image blog">
