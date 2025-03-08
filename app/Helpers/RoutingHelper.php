@@ -61,4 +61,8 @@ class RoutingHelper
         return Route::is(['admin.users.index']);
     }
 
+    public static function isSubscriptionsRoute(){
+        return Route::is(['subscriptions.index']);
+    }
+
 }

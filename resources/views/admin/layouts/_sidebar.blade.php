@@ -70,6 +70,15 @@
     </li>
 
 
+    <li class="nav-item {{ \App\Helpers\RoutingHelper::isSubscriptionsRoute() ? 'active' : '' }}">
+        <a class="nav-link" href="{{route('subscriptions.index')}}"
+        >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Subscriptions</span>
+        </a>
+    </li>
+
+
 
     <!-- Nav Item - Pages Collapse Menu -->
     @can('view', \App\Models\Post::class)
