@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img class="rounded-circle mt-5" id="temp_image" width="150px" src="{{asset($user->user_profile)}}" ><span
-                            class="font-weight-bold">Profile Picture</span>
+                        <img class="rounded-circle mt-5" id="temp_image" width="150px"
+                            src="{{ asset($user->user_profile) }}"><span class="font-weight-bold">Profile Picture</span>
                         {{-- "https://ui-avatars.com/api/?name={$this->name}&rounded=true&bold=true"; --}}
 
                     </div>
@@ -85,8 +85,7 @@
 
                                     <div class="col-md-12"><label class="labels">Experience</label><input type="text"
                                             class="form-control" placeholder="experience"
-                                            value="{{ old('experience', $user->experience) }}"
-                                            name="experience">
+                                            value="{{ old('experience', $user->experience) }}" name="experience">
                                         @error('experience')
                                             <span class="text-danger text-sm">{{ $message }}</span>
                                         @enderror
@@ -107,11 +106,6 @@
                     </div>
 
         </form>
-    </div>
-
-    </div>
-    </div>
-    </div>
     </div>
 @endsection
 

@@ -12,11 +12,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body style="background:url({{asset('frontend/assets/img/bg/bg-parallax-1.jpg')}});">
+<body >
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm " style="backdrop-filter: blur(10px); background: rgb(255, 255, 255);">
             <div class="container">
@@ -78,4 +84,6 @@
         </main>
     </div>
 </body>
+@yield('page-level-scripts')
 </html>
+

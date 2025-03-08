@@ -49,10 +49,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
+            'country' => 'required|min:3|max:255|string',
+            'education' => 'required|min:3|max:255|string',
+            'experience' => 'required|min:3|max:255|string',
+            'state' => 'required|min:3|max:255|string',
+            'bio' => 'required|min:3|max:500|string',
+            'profile_pic' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
     }
 
@@ -64,11 +71,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        if(isset($data["profile_pic"])){
+            $data['profile_pic'] = $data["profile_pic"]->store('profilePics', 'public');
+        }else{
+            $data['profile_pic'] = null;
+        }
+            return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_token' => Str::random(16)
+            'user_token' => Str::random(16),
+            'country' => $data['country'],
+            'education' => $data['education'],
+            'experience' => $data['experience'],
+            'state' => $data['state'],
+            'bio' => $data['bio'],
+            'profile_pic' => $data['profile_pic']
         ]);
     }
 }

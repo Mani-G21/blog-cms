@@ -3,9 +3,9 @@
 @section('content')
 
     <div style="position: relative; top:20dvh">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center ">
             <div class="col-md-6">
-                <div class="card shadow text-white" style="backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.034); border-radius: 15px; border: none;">
+                <div class="border bg-white">
                     <div class="card-header text-center" style="padding: 10px; font-size:2rem; color: #ff1900">Login</div>
 
                     <div class="card-body">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-0">
+                            <div class="row mb-4">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn text-white" style="background-color: #ff4530">
                                         {{ __('Login') }}
