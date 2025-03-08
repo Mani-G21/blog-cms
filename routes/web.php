@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SubscriptionsController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CommentsController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ Route::get('/blogs/categories/{category}', [\App\Http\Controllers\BlogsControlle
 Route::get('/blogs/tags/{tag}', [\App\Http\Controllers\BlogsController::class, 'showByTag'])->name('frontend.showByTag');
 Route::get('/authors/{user}', [\App\Http\Controllers\BlogsController::class, 'showUser'])->name('frontend.showUser');
 Route::post('/comments', [CommentsController::class, 'store'])->name('comment.store');
+Route::post('/newsletter/subscriber', [BlogsController::class, 'addSubscriber'])->name('subscribe');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('tags', \App\Http\Controllers\admin\TagsController::class)->except(['show']);

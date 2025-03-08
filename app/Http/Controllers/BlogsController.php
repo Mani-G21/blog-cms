@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Subscriber;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -117,5 +118,13 @@ class BlogsController extends Controller
             'user',
             'famousPost'
         ]));
+    }
+
+    public function addSubscriber(Request $request){
+        $validated = $request->validate([
+            'email' => 'required|unique:subscribers|max:255'
+        ]);
+        Subscriber::create($validated);
+        return redirect()->route('frontend.home')->with('success', 'Subscribed to newsletter successfully!');
     }
 }

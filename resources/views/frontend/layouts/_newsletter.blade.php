@@ -9,13 +9,18 @@
             </div>
 
             <div class="col-md-10">
-                <form name="newsletter">
+                <form name="newsletter" action={{route('subscribe')}} method="POST">
+                    @csrf
                     <div class="input-newsletter-container">
-                        <input type="text" name="email" class="input-newsletter" placeholder="enter your email address">
+                        <input type="email" name="email" class="input-newsletter" placeholder="enter your email address" required>
                     </div>
-                    <a href="#" class="button button-sm button-pasific hover-ripple-out">Subscribe<i
-                            class="fa fa-envelope"></i></a>
+
+                    <button type="submit" class="button button-sm button-pasific hover-ripple-out">Subscribe<i
+                            class="fa fa-envelope"></i></button>
                 </form>
+                @error('email')
+                <span style="color: red">This email is already subscribed to the news letter!</span>
+            @enderror
             </div>
         </div>
     </div>
