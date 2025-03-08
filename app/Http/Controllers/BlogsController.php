@@ -42,6 +42,8 @@ class BlogsController extends Controller
         $tags = Tag::all();
         $post = Post::where('slug', $slug)->first();
         $comments = Comment::with('replies')->where('post_id', $post->id)->get()->toArray();
+        $userName = User::where('id', $post->author_id)->firstOrFail()->name;
+
 
         $this->trackViewCount($post);
         return view('frontend.blog', compact([
@@ -49,7 +51,7 @@ class BlogsController extends Controller
             'categories',
             'tags',
             'comments',
-
+            'userName'
         ]));
     }
 
