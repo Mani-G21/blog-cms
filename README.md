@@ -1,66 +1,171 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 style="display: flex; align-items: center; justify-content: center;">
+<img src="public/frontend/assets/img/logo/logo-default.png" alt="Pen-It Logo" style="margin-left: 10px; height: 40px;">
+    Pen-It 
+</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About Pen-It
+<p>Pen-It is a full-stack, feature-rich blog management system designed for admins, authors, and readers. Built using the MVC architecture, it ensures scalability, maintainability, and ease of use.</p>
 
-## About Laravel
+## Features:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Core Features:
+- ___Secure Authentication___: <br>Ensures reliable access control for users.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ___Admin Tools___: <br>Efficient user and content management with category and tag creation.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- ___Analytics for Authors___: <br>Provides detailed insights like total views, most engaging posts, and AI-generated article tracking.
 
-## Learning Laravel
+- ___Public Interface___: <br>Intuitive UI supporting browsing, commenting, and advanced search filters by categories, tags, or authors.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- ___Stripe Integration___: <br>Enables subscription-based access to premium features such as AI-powered article generation.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- ___Newsletter System___: <br>Engages users with timely updates on trending posts and new content.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Technical Implementations:
 
-## Laravel Sponsors
+- Built using the MVC architecture to maintain separation of concerns.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Policies for role-based access control and resource management.
 
-### Premium Partners
+- Uses Schedulers and queues for seamless asynchronous email notifications without needing to wait for the subscribers to receive the notification.
+  
+- Observer Pattern to automate repetitive tasks like updating analytics and sending notifications.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Chain Of Responsibility Pattern to manage and validate the user's request.
 
-## Contributing
+- Global Context to manage shared data and states across the application.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Secured the app with CSRF Protection for robust security against malicious attacks.
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Prerequisites:
 
-## Security Vulnerabilities
+- PHP 8.0+
+- Laravel
+- Composer
+- MySQL
+- NPM
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Steps to setup:
 
-## License
+1. Clone the repository
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+    git clone https://github.com/Mani-G21/blog-cms
+```
+2. Install the dependancies
+
+```bash
+    composer install
+    npm install
+```
+
+3. configure the `.env` file with the help of `.env.example`
+
+4. Run database migrations
+
+```bash
+    php artisan migrate
+```
+5. Start the development server
+
+```bash
+    php artisan serve
+```
+
+6. Start the front-end server for auth
+
+```bash
+    npm run dev
+```
+
+7. Start the Queue in order listen for any jobs
+
+```bash
+    php artisan queue:work
+```
+<br>
+
+## Usage
+
+### Admin Role
+- Manage users, categories, tags, and blogs.
+  
+### Author Role
+- Write and publish blog posts.
+- View post performance via analytics.
+- Subscriber for premium features to generate blog posts with AI-Powered Assistance
+
+### Reader Role
+- Explore blogs, authors, comment on posts, and subscribe for newsletters.
+
+## Overview of the folder structure:
+- `app/Helpers/` : Helper functions.
+- `app/Http/Controllers`: To implement the business logic and to return the views.
+- `app/Jobs/`: Jobs to send the email notifications
+- `app/Models/`: Models to communicate with the database
+- `app/Observers/`: To observe on the changes being made to the database and take suitable actions on it.
+- `app/policies/`: To implement access on the models based on the role of the user.
+- `database/`: To provide the seeders, factories and migrations for the database tables.
+- `resources/views/`: To provide the UI for the frontend.
+- `routes/`: Provides routes for navigation
+- `storage/app/public/` Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
+
+## Screenshots
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/homePage.png" alt="Home Page" width="500px">
+        <p>Home Page</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/userProfile.png" alt="Author Details" width="500px">
+        <p>Author Details</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/blogHero.png" alt="Blog Hero Section" width="500px">
+        <p>Blog Hero Section</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/blog.png" alt="Blog Details" width="500px">
+        <p>Blog Details</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/leaveComment.png" alt="Comments" width="500px">
+        <p>Reader Comments</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/register.png" alt="Registration" width="500px">
+        <p>Registration</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/dashboard.png" alt="Dashboard" width="500px">
+        <p>Dashboard</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/postManagement.png" alt="Posts Management" width="500px">
+        <p>Posts Management</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/subscriptionPlans.png" alt="Subscription Plans" width="500px">
+        <p>Subscription Plans</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/categoryManagement.png" alt="Categories Management" width="500px">
+        <p>Categories Management</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/createPost.png" alt="Post Creation" width="500px">
+        <p>Creating a Post</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/manageUsers.png" alt="User Management" width="500px">
+        <p>User Management</p>
+    </div>
+    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
+        <img src="storage/app/public/appScreenshots/Tags.png" alt="Tags Management" width="500px">
+        <p>Tags Management</p>
+    </div>
+    
+    
+</div>
