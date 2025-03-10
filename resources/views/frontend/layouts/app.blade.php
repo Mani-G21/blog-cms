@@ -73,7 +73,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9 mt25">
-             @include('admin.layouts._alerts')
               @yield('main-content')
             </div>
             @include('frontend.layouts._sidebar')
