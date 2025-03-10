@@ -112,7 +112,7 @@
 - `app/Jobs/`<br>Jobs to send the email notifications
 - `app/Models/` <br>Models to communicate with the database
 - `app/Observers/`<br>To observe on the changes being made to the database and take suitable actions on it.
-- `app/policies/`: <br>To implement access on the models based on the role of the user.
+- `app/policies/`<br>To implement access on the models based on the role of the user.
 - `database/`<br> To provide the seeders, factories and migrations for the database tables.
 - `resources/views/` <br>To provide the UI for the frontend.
 - `routes/`<br> Provides routes for navigation
