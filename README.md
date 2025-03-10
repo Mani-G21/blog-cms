@@ -12,12 +12,14 @@
 - ___Secure Authentication___: <br>Ensures reliable access control for users.
 
 - ___Admin Tools___: <br>Efficient user and content management with category and tag creation.
+  
+- ___Stripe Integration___: <br>Enables subscription-based access to premium features such as AI-powered article generation.
 
 - ___Analytics for Authors___: <br>Provides detailed insights like total views, most engaging posts, and AI-generated article tracking.
 
+- ___AI powered assistance___: <br>With the help of AI, the author can generate the body of the blog.
+  
 - ___Public Interface___: <br>Intuitive UI supporting browsing, commenting, and advanced search filters by categories, tags, or authors.
-
-- ___Stripe Integration___: <br>Enables subscription-based access to premium features such as AI-powered article generation.
 
 - ___Newsletter System___: <br>Engages users with timely updates on trending posts and new content.
 
@@ -54,38 +56,40 @@
 ```bash
     git clone https://github.com/Mani-G21/blog-cms
 ```
-2. Install the dependancies
+
+2. Remove the `.git` file
+ 
+3. Install the dependancies
 
 ```bash
     composer install
     npm install
 ```
 
-3. configure the `.env` file with the help of `.env.example`
+4. configure the `.env` file with the help of `.env.example`
 
-4. Run database migrations
+5. Run database migrations
 
 ```bash
     php artisan migrate
 ```
-5. Start the development server
+6. Start the development server
 
 ```bash
     php artisan serve
 ```
 
-6. Start the front-end server for auth
+7. Start the front-end server for auth
 
 ```bash
     npm run dev
 ```
 
-7. Start the Queue in order listen for any jobs
+8. Start the Queue in order to listen for any jobs
 
 ```bash
     php artisan queue:work
 ```
-<br>
 
 ## Usage
 
@@ -101,16 +105,18 @@
 - Explore blogs, authors, comment on posts, and subscribe for newsletters.
 
 ## Overview of the folder structure:
-- `app/Helpers/` : Helper functions.
-- `app/Http/Controllers`: To implement the business logic and to return the views.
-- `app/Jobs/`: Jobs to send the email notifications
-- `app/Models/`: Models to communicate with the database
-- `app/Observers/`: To observe on the changes being made to the database and take suitable actions on it.
-- `app/policies/`: To implement access on the models based on the role of the user.
-- `database/`: To provide the seeders, factories and migrations for the database tables.
-- `resources/views/`: To provide the UI for the frontend.
-- `routes/`: Provides routes for navigation
-- `storage/app/public/` Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
+- `app/Helpers/` <br>Helper functions.
+  
+- `app/Http/Controllers`<br> To implement the business logic and to return the views.
+
+- `app/Jobs/`<br>Jobs to send the email notifications
+- `app/Models/` <br>Models to communicate with the database
+- `app/Observers/`<br>To observe on the changes being made to the database and take suitable actions on it.
+- `app/policies/`: <br>To implement access on the models based on the role of the user.
+- `database/`<br> To provide the seeders, factories and migrations for the database tables.
+- `resources/views/` <br>To provide the UI for the frontend.
+- `routes/`<br> Provides routes for navigation
+- `storage/app/public/` <br>Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
 
 ## Screenshots
 
