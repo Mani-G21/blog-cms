@@ -105,7 +105,7 @@
 - Explore blogs, authors, comment on posts, and subscribe for newsletters.
 
 ## Overview of the folder structure:
-- `app/Helpers/` <br>Helper functions.
+- `app/Helpers/`<br>Helper functions.
   
 - `app/Http/Controllers`<br> To implement the business logic and to return the views.
 
@@ -114,9 +114,9 @@
 - `app/Observers/`<br>To observe on the changes being made to the database and take suitable actions on it.
 - `app/policies/`<br>To implement access on the models based on the role of the user.
 - `database/`<br> To provide the seeders, factories and migrations for the database tables.
-- `resources/views/` <br>To provide the UI for the frontend.
+- `resources/views/`<br>To provide the UI for the frontend.
 - `routes/`<br> Provides routes for navigation
-- `storage/app/public/` <br>Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
+- `storage/app/public/`<br>Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
 
 ## Screenshots
 
