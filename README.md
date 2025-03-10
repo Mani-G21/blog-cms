@@ -113,59 +113,42 @@
 - `storage/app/public/` Provides the assets for the blogs or to store the assets in the project ___(A softlink points to this directory for accessing these assets with the help of public url)___.
 
 ## Screenshots
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/homePage.png" alt="Home Page" width="500px">
-        <p>Home Page</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/userProfile.png" alt="Author Details" width="500px">
-        <p>Author Details</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/blogHero.png" alt="Blog Hero Section" width="500px">
-        <p>Blog Hero Section</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/blog.png" alt="Blog Details" width="500px">
-        <p>Blog Details</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/leaveComment.png" alt="Comments" width="500px">
-        <p>Reader Comments</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/register.png" alt="Registration" width="500px">
-        <p>Registration</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/dashboard.png" alt="Dashboard" width="500px">
-        <p>Dashboard</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/postManagement.png" alt="Posts Management" width="500px">
-        <p>Posts Management</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/subscriptionPlans.png" alt="Subscription Plans" width="500px">
-        <p>Subscription Plans</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/categoryManagement.png" alt="Categories Management" width="500px">
-        <p>Categories Management</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/createPost.png" alt="Post Creation" width="500px">
-        <p>Creating a Post</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/manageUsers.png" alt="User Management" width="500px">
-        <p>User Management</p>
-    </div>
-    <div style="flex: 1 1 45%; max-width: 45%; text-align: center;">
-        <img src="storage/app/public/appScreenshots/Tags.png" alt="Tags Management" width="500px">
-        <p>Tags Management</p>
-    </div>
-    
-    
-</div>
+
+### Home page
+![Blog Hero Section](storage/app/public/appScreenshots/homePage.png)
+
+### Author details
+![Blog Hero Section](storage/app/public/appScreenshots/userProfile.png)
+
+### Blog Hero Section
+![Blog Hero Section](storage/app/public/appScreenshots/blogHero.png)
+
+### Blog Details
+![Blog Details](storage/app/public/appScreenshots/blog.png)
+
+### Reader comments
+![Comments](storage/app/public/appScreenshots/leaveComment.png)
+
+### Registration
+![Registration](storage/app/public/appScreenshots/register.png)
+
+### Dashboard
+![Dashboard](storage/app/public/appScreenshots/dashboard.png)
+
+### Subscription Plans
+![Subscription plans](storage/app/public/appScreenshots/subscriptionPlans.png)
+
+### Creating a post
+![Post Creation](storage/app/public/appScreenshots/createPost.png)
+
+### User Management
+![User management](storage/app/public/appScreenshots/manageUsers.png)
+
+### Categories Management
+![Categories Management](storage/app/public/appScreenshots/categoryManagement.png)
+
+### Tags Management
+![Tags Management](storage/app/public/appScreenshots/Tags.png)
+
+### Posts Management
+![Posts Management](storage/app/public/appScreenshots/postManagement.png)
